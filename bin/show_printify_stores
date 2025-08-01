@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+use Modern::Perl;
+use lib "lib";
+use WebService::Printify;
+
+unless (@ARGV == 1) {
+   die "Usage: show_printify_stores <API_Token>";
+}
+my $tok = shift;
+my $ws = WebService::Printify->new(token => $tok);
+foreach my $s ($ws->shops) {
+   say $s->id . "\t". $s->title. "\t".$s->sales_channel;
+}
